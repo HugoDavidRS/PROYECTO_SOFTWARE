@@ -1,0 +1,22 @@
+[
+    {
+        "id": "93dd876a-14a6-4d10-bf51-eec09ee8dd61",
+        "filename": "data/binaries\\93dd876a-14a6-4d10-bf51-eec09ee8dd6120251125152124.bin",
+        "environment": "dev",
+        "status": "signed",
+        "uploaded_at": "2025-11-25T15:21:24.710121",
+        "signed_path": "C:\\Users\\hugod\\upsrj-proyecto-final\\data\\signed\\signed_93dd876a-14a6-4d10-bf51-eec09ee8dd6120251125152124.bin",
+        "signature": "599ed9b696770e540fbf4c80cf68bc2f145f9546cdfddd276bb177c70ce835cd",
+        "timestamp": "2025-11-25T15:21:24.710667"
+    },
+    {
+        "id": "4d2dc079-75fc-4397-852a-26207ed7fb56",
+        "filename": "data/binaries\\4d2dc079-75fc-4397-852a-26207ed7fb5620251125152143.bin",
+        "environment": "prod",
+        "status": "signed",
+        "uploaded_at": "2025-11-25T15:21:43.573472",
+        "signed_path": "C:\\Users\\hugod\\upsrj-proyecto-final\\data\\signed\\signed_4d2dc079-75fc-4397-852a-26207ed7fb5620251125152143.bin",
+        "signature": "599ed9b696770e540fbf4c80cf68bc2f145f9546cdfddd276bb177c70ce835cd",
+        "timestamp": "2025-11-25T15:21:43.574129"
+    }
+]

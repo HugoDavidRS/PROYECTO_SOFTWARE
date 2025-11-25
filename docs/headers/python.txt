@@ -1,0 +1,10 @@
+# ============================================================
+# Politécnica de Santa Rosa
+#
+# Materia: Arquitecturas de Software
+# Profesor: Jesús Salvador López Ortega
+# Alumno: Hugo David Rosas Labra
+# Grupo: ISW28
+# Archivo: test_main.py
+# Descripción: Archivo de pruebas unitarias para validar el comportamiento de funciones del proyecto
+# ============================================================

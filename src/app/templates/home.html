@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Firma Digital Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- TEMA PROFESIONAL (Colores Azules/Grises) --- */
+        :root {
+            --primary-color: #2C5AA0;
+            --primary-dark: #1E3A6E;
+            --primary-light: #4A7FD4;
+            --secondary-color: #6C757D;
+            --success-color: #28A745;
+            --warning-color: #FFC107;
+            --danger-color: #DC3545;
+            --info-color: #17A2B8;
+            
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --bg-gray: #E9ECEF;
+            --bg-dark: #343A40;
+            
+            --text-primary: #212529;
+            --text-secondary: #6C757D;
+            --text-light: #F8F9FA;
+            --text-muted: #ADB5BD;
+            
+            --border-color: #DEE2E6;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.12);
+            
+            --transition: all 0.3s ease;
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* --- ESTILOS BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* --- TIPOGRAFÍA --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* --- LAYOUT Y CONTENEDORES --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 0.75rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- TARJETAS Y PANELES --- */
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+        }
+
+        /* --- FORMULARIOS --- */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-light);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+        }
+
+        .form-select {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-light);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-custom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-white);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .file-input-custom:hover {
+            border-color: var(--primary-light);
+            background-color: rgba(44, 90, 160, 0.05);
+        }
+
+        .file-input-text {
+            color: var(--text-secondary);
+        }
+
+        .file-input-icon {
+            color: var(--primary-color);
+        }
+
+        .file-name-display {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-primary {
+            color: var(--text-light);
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            color: var(--text-light);
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            background-color: transparent;
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            color: var(--text-light);
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-success {
+            color: var(--text-light);
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        .btn-warning {
+            color: var(--text-primary);
+            background-color: var(--warning-color);
+            border-color: var(--warning-color);
+        }
+
+        .btn-danger {
+            color: var(--text-light);
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* --- TABLAS --- */
+        .table-container {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+            border-collapse: collapse;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid var(--border-color);
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 1rem;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table tbody tr {
+            transition: var(--transition);
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(44, 90, 160, 0.03);
+        }
+
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .table tbody tr:first-child td {
+            border-top: none;
+        }
+
+        /* --- ETIQUETAS DE ESTADO --- */
+        .badge {
+            display: inline-block;
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            font-weight: 600;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.375rem;
+        }
+
+        .badge-success {
+            color: var(--text-light);
+            background-color: var(--success-color);
+        }
+
+        .badge-warning {
+            color: var(--text-primary);
+            background-color: var(--warning-color);
+        }
+
+        .badge-danger {
+            color: var(--text-light);
+            background-color: var(--danger-color);
+        }
+
+        .badge-info {
+            color: var(--text-light);
+            background-color: var(--info-color);
+        }
+
+        .badge-secondary {
+            color: var(--text-light);
+            background-color: var(--secondary-color);
+        }
+
+        /* --- INDICADORES DE ENTORNO --- */
+        .environment {
+            font-weight: 600;
+        }
+
+        .env-prod {
+            color: var(--danger-color);
+        }
+
+        .env-dev {
+            color: var(--success-color);
+        }
+
+        /* --- POPUP DE NOTIFICACIÓN --- */
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-hover);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            max-width: 400px;
+            animation: slideInRight 0.5s ease-out;
+            transform: translateX(0);
+        }
+
+        .popup.hide {
+            animation: slideOutRight 0.5s ease-in forwards;
+        }
+
+        .popup-success {
+            background-color: var(--success-color);
+            color: var(--text-light);
+        }
+
+        .popup-warning {
+            background-color: var(--warning-color);
+            color: var(--text-primary);
+        }
+
+        .popup-danger {
+            background-color: var(--danger-color);
+            color: var(--text-light);
+        }
+
+        .popup-info {
+            background-color: var(--info-color);
+            color: var(--text-light);
+        }
+
+        .popup-icon {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .popup-content {
+            flex: 1;
+        }
+
+        .popup-close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 1.25rem;
+            cursor: pointer;
+            margin-left: 0.75rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .popup-close:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* --- PANEL DE ESTADÍSTICAS --- */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- PROGRESS BAR --- */
+        .progress {
+            display: flex;
+            height: 0.75rem;
+            overflow: hidden;
+            background-color: var(--bg-gray);
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-light);
+            text-align: center;
+            white-space: nowrap;
+            background-color: var(--primary-color);
+            transition: width 0.6s ease;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .sidebar-nav-link:hover {
+            background-color: rgba(44, 90, 160, 0.08);
+            color: var(--primary-color);
+        }
+
+        .sidebar-nav-link.active {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .sidebar-nav-icon {
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        .footer {
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        /* --- UTILIDADES --- */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .mb-1 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 2rem !important;
+        }
+
+        .mt-1 {
+            margin-top: 0.5rem !important;
+        }
+
+        .mt-2 {
+            margin-top: 1rem !important;
+        }
+
+        .mt-3 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 2rem !important;
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .align-items-center {
+            align-items: center !important;
+        }
+
+        .justify-content-between {
+            justify-content: space-between !important;
+        }
+
+        .w-100 {
+            width: 100% !important;
+        }
+
+        .monospace {
+            font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            .table {
+                min-width: 800px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* --- ANIMACIONES ADICIONALES --- */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(44, 90, 160, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(44, 90, 160, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(44, 90, 160, 0); }
+        }
+
+        /* --- LOADING SPINNER --- */
+        .spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid rgba(44, 90, 160, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1060;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-hover);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-50px);
+            transition: var(--transition);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-signature logo-icon"></i>
+                <h1>Sistema de Firma Digital</h1>
+            </div>
+            <p class="subtitle">Proteja y autentique sus archivos binarios con nuestro sistema de firma digital seguro y confiable</p>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="totalFiles">0</div>
+                <div class="stat-label">Archivos Totales</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="signedFiles">0</div>
+                <div class="stat-label">Firmados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pendingFiles">0</div>
+                <div class="stat-label">Pendientes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="prodFiles">0</div>
+                <div class="stat-label">Producción</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Navegación</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-nav-item">
+                                <a href="#upload-section" class="sidebar-nav-link active">
+                                    <i class="fas fa-upload sidebar-nav-icon"></i>
+                                    Subir Archivo
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#files-section" class="sidebar-nav-link">
+                                    <i class="fas fa-list sidebar-nav-icon"></i>
+                                    Historial de Archivos
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#help-section" class="sidebar-nav-link">
+                                    <i class="fas fa-question-circle sidebar-nav-icon"></i>
+                                    Ayuda
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#settings-section" class="sidebar-nav-link">
+                                    <i class="fas fa-cog sidebar-nav-icon"></i>
+                                    Configuración
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-info-circle"></i> Información</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-2">
+                            <i class="fas fa-check-circle text-success"></i> <strong>Desarrollo:</strong> Firma automática
+                        </p>
+                        <p class="text-muted">
+                            <i class="fas fa-clock text-warning"></i> <strong>Producción:</strong> Requiere aprobación
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-history"></i> Actividad Reciente</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivity">
+                            <p class="text-muted text-center">Cargando actividad...</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content">
+                <section id="upload-section" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title"><i class="fas fa-cloud-upload-alt"></i> Subir Archivo para Firma</h2>
+                        </div>
+                        <div class="card-body">
+                            <form id="uploadForm">
+                                <div class="form-group">
+                                    <label for="file" class="form-label">Seleccionar Archivo:</label>
+                                    <div class="file-input-wrapper">
+                                        <div class="file-input-custom">
+                                            <span class="file-input-text" id="fileInputText">Seleccione un archivo...</span>
+                                            <i class="fas fa-paperclip file-input-icon"></i>
+                                        </div>
+                                        <input type="file" id="file" name="file" required>
+                                    </div>
+                                    <div class="file-name-display" id="fileNameDisplay"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="environment" class="form-label">Entorno de Destino:</label>
+                                    <select id="environment" name="environment" class="form-select">
+                                        <option value="dev">Desarrollo (Firma Automática)</option>
+                                        <option value="prod">Producción (Requiere Aprobación)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description" class="form-label">Descripción (Opcional):</label>
+                                    <textarea id="description" name="description" class="form-control" rows="3" placeholder="Agregue una descripción para este archivo..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <i class="fas fa-paper-plane"></i> Subir y Procesar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="files-section">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h2 class="card-title mb-0"><i class="fas fa-file-alt"></i> Historial de Archivos</h2>
+                            <div>
+                                <button id="refreshBtn" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-sync-alt"></i> Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Archivo</th>
+                                            <th>Entorno</th>
+                                            <th>Estado</th>
+                                            <th>Fecha</th>
+                                            <th>Acción</th>
+                                            <th>Firma (Hash)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="fileTableBody">
+                                        <!-- Las filas se cargarán dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button id="loadMoreBtn" class="btn btn-outline-primary">
+                                    <i class="fas fa-plus"></i> Cargar Más Archivos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="help-section" class="mb-4 d-none">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title"><i class="fas fa-question-circle"></i> Ayuda</h2>
+                        </div>
+                        <div class="card-body">
+                            <h3>¿Cómo funciona el sistema de firma digital?</h3>
+                            <p>Nuestro sistema de firma digital le permite proteger sus archivos binarios mediante un proceso de autenticación seguro.</p>
+                            
+                            <h4>Proceso de Firma:</h4>
+                            <ol>
+                                <li>Seleccione el archivo que desea firmar</li>
+                                <li>Elija el entorno de destino (Desarrollo o Producción)</li>
+                                <li>En Desarrollo, la firma es automática</li>
+                                <li>En Producción, se requiere aprobación manual</li>
+                                <li>Reciba el archivo firmado con su hash único</li>
+                            </ol>
+                            
+                            <h4>Tipos de Entorno:</h4>
+                            <ul>
+                                <li><strong>Desarrollo:</strong> Firma automática inmediata para pruebas</li>
+                                <li><strong>Producción:</strong> Requiere revisión y aprobación manual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="settings-section" class="mb-4 d-none">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title"><i class="fas fa-cog"></i> Configuración</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="autoRefresh" class="form-label">Actualización Automática:</label>
+                                <select id="autoRefresh" class="form-select">
+                                    <option value="0">Desactivada</option>
+                                    <option value="5">Cada 5 segundos</option>
+                                    <option value="10">Cada 10 segundos</option>
+                                    <option value="30">Cada 30 segundos</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="resultsPerPage" class="form-label">Resultados por Página:</label>
+                                <select id="resultsPerPage" class="form-select">
+                                    <option value="10">10 resultados</option>
+                                    <option value="25" selected>25 resultados</option>
+                                    <option value="50">50 resultados</option>
+                                    <option value="100">100 resultados</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Notificaciones:</label>
+                                <div>
+                                    <input type="checkbox" id="notifySuccess" checked>
+                                    <label for="notifySuccess">Éxito de firma</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="notifyPending" checked>
+                                    <label for="notifyPending">Archivos pendientes</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="notifyError" checked>
+                                    <label for="notifyError">Errores</label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Configuración
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Sistema de Firma Digital. Todos los derechos reservados por Hugo David Rosas Labra .</p>
+            <p class="text-muted">Versión 2.1.0 | <a href="#" class="text-muted">Términos de Uso</a> | <a href="#" class="text-muted">Política de Privacidad</a></p>
+        </footer>
+    </div>
+
+    <!-- Popup de Notificación -->
+    <div id="popup" class="popup d-none">
+        <i class="popup-icon" id="popupIcon"></i>
+        <div class="popup-content" id="popupContent"></div>
+        <button class="popup-close" id="popupClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Modal de Detalles -->
+    <div id="fileDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalles del Archivo</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Contenido cargado dinámicamente -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">Cerrar</button>
+                <button class="btn btn-primary" id="modalDownload">Descargar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos DOM
+        const fileInput = document.getElementById('file');
+        const fileInputText = document.getElementById('fileInputText');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const form = document.getElementById('uploadForm');
+        const popup = document.getElementById('popup');
+        const popupIcon = document.getElementById('popupIcon');
+        const popupContent = document.getElementById('popupContent');
+        const popupClose = document.getElementById('popupClose');
+        const fileTableBody = document.getElementById('fileTableBody');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const modal = document.getElementById('fileDetailsModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalDownload = document.getElementById('modalDownload');
+        const modalContent = document.getElementById('modalContent');
+        const totalFilesEl = document.getElementById('totalFiles');
+        const signedFilesEl = document.getElementById('signedFiles');
+        const pendingFilesEl = document.getElementById('pendingFiles');
+        const prodFilesEl = document.getElementById('prodFiles');
+        const recentActivityEl = document.getElementById('recentActivity');
+
+        // Variables de estado
+        let files = [];
+        let displayCount = 10;
+
+        // --- Cargar historial al iniciar ---
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFiles();
+            updateStats();
+            setupEventListeners();
+            setupNavigation();
+        });
+
+        function setupEventListeners() {
+            // Form submission
+            form.addEventListener('submit', handleFormSubmit);
+            
+            // File input change
+            fileInput.addEventListener('change', handleFileInputChange);
+            
+            // Refresh button
+            refreshBtn.addEventListener('click', function() {
+                loadFiles();
+                showPopup('info', 'Lista actualizada');
+            });
+            
+            // Load more button
+            loadMoreBtn.addEventListener('click', function() {
+                displayCount += 10;
+                renderFileTable();
+            });
+            
+            // Popup close
+            popupClose.addEventListener('click', hidePopup);
+            
+            // Modal close
+            modalClose.addEventListener('click', hideModal);
+            modalCancel.addEventListener('click', hideModal);
+            
+            // Click outside modal to close
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    hideModal();
+                }
+            });
+        }
+
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.sidebar-nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get target section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const sections = document.querySelectorAll('section');
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.classList.add('d-none');
+                    });
+                    
+                    // Show target section
+                    document.getElementById(targetId + '-section').classList.remove('d-none');
+                });
+            });
+        }
+
+        function handleFileInputChange() {
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+            fileInputText.textContent = fileName || 'Seleccione un archivo...';
+            fileNameDisplay.textContent = fileName ? `Archivo seleccionado: ${fileName}` : '';
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('button');
+            const envSelect = document.getElementById('environment');
+            const isProd = envSelect.value === 'prod';
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> Procesando...';
+
+            try {
+                // 1. Subir archivo
+                const uploadResponse = await fetch('/upload', { method: 'POST', body: formData });
+                if (!uploadResponse.ok) throw new Error("Falló la subida");
+                const file = await uploadResponse.json();
+
+                let signed = file; // Por defecto usamos el resultado de la subida
+
+                // 2. Firmar SOLO si NO es Producción (Dev)
+                if (!isProd) {
+                    const signResponse = await fetch('/sign', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ file_id: file.id })
+                    });
+                    if (!signResponse.ok) throw new Error("Falló la firma");
+                    signed = await signResponse.json();
+                }
+
+                // 3. Notificar
+                const isSigned = signed.status === "signed";
+                
+                if (isSigned) {
+                    showPopup('success', '¡Éxito! Archivo subido y firmado (Desarrollo).');
+                } else {
+                    // Mensaje para Prod
+                    showPopup('warning', file.message || 'Archivo subido. Revise su correo para aprobar la firma.');
+                }
+
+                // Recargar tabla y estadísticas
+                loadFiles();
+                updateStats();
+
+                form.reset();
+                fileInputText.textContent = 'Seleccione un archivo...';
+                fileNameDisplay.textContent = '';
+
+            } catch (error) {
+                console.error(error);
+                showPopup('danger', 'Error: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Subir y Procesar';
+            }
+        }
+
+        async function loadFiles() {
+            try {
+                const response = await fetch('/files');
+                if (response.ok) {
+                    files = await response.json();
+                    // Mostramos los más recientes primero
+                    files.reverse();
+                    renderFileTable();
+                    updateRecentActivity();
+                }
+            } catch (error) {
+                console.error("Error cargando historial:", error);
+                showPopup('danger', 'Error al cargar el historial de archivos');
+            }
+        }
+
+        function renderFileTable() {
+            fileTableBody.innerHTML = '';
+            
+            const filesToShow = files.slice(0, displayCount);
+            
+            if (filesToShow.length === 0) {
+                fileTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">
+                            <i class="fas fa-folder-open fa-2x mb-2"></i><br>
+                            No hay archivos para mostrar
+                        </td>
+                    </tr>
+                `;
+                loadMoreBtn.classList.add('d-none');
+                return;
+            }
+            
+            filesToShow.forEach(file => addRowToTable(file));
+            
+            // Mostrar u ocultar botón "Cargar más"
+            if (displayCount >= files.length) {
+                loadMoreBtn.classList.add('d-none');
+            } else {
+                loadMoreBtn.classList.remove('d-none');
+            }
+        }
+
+        function addRowToTable(file) {
+            const newRow = document.createElement('tr');
+            
+            // Formateo visual
+            const shortId = file.id ? file.id.substring(0, 8) + '...' : '???';
+            const shortSig = file.signature ? file.signature.substring(0, 10) + '...' : '—';
+            
+            // Manejo de fecha
+            let dateStr = file.uploaded_at || file.uploaded_date || '—';
+            if(dateStr.includes('T')) dateStr = dateStr.split('T')[0];
+
+            // Estado
+            let statusBadge = '';
+            if (file.status === 'signed') {
+                statusBadge = '<span class="badge badge-success">Firmado</span>';
+            } else if (file.status === 'pending') {
+                statusBadge = '<span class="badge badge-warning">Pendiente</span>';
+            } else {
+                statusBadge = '<span class="badge badge-secondary">' + (file.status || 'Desconocido') + '</span>';
+            }
+
+            // Entorno
+            let envClass = file.environment === 'prod' ? 'env-prod' : 'env-dev';
+            let envText = file.environment === 'prod' ? 'Producción' : 'Desarrollo';
+
+            // Acciones
+            let actionHtml = '';
+            if (file.signed_path) {
+                actionHtml = `
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewFileDetails('${file.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-success" onclick="downloadFile('${file.id}')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                actionHtml = '<span class="text-muted">—</span>';
+            }
+
+            newRow.innerHTML = `
+                <td class="monospace">${shortId}</td>
+                <td>${file.filename}</td>
+                <td class="environment ${envClass}">${envText}</td>
+                <td>${statusBadge}</td>
+                <td>${dateStr}</td>
+                <td>${actionHtml}</td>
+                <td class="monospace">${shortSig}</td>
+            `;
+            
+            fileTableBody.appendChild(newRow);
+        }
+
+        function updateStats() {
+            // En una implementación real, estos datos vendrían del servidor
+            const total = files.length;
+            const signed = files.filter(f => f.status === 'signed').length;
+            const pending = files.filter(f => f.status === 'pending').length;
+            const prod = files.filter(f => f.environment === 'prod').length;
+            
+            // Animación de contadores
+            animateValue(totalFilesEl, 0, total, 1000);
+            animateValue(signedFilesEl, 0, signed, 1000);
+            animateValue(pendingFilesEl, 0, pending, 1000);
+            animateValue(prodFilesEl, 0, prod, 1000);
+        }
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function updateRecentActivity() {
+            const recentFiles = files.slice(0, 5);
+            
+            if (recentFiles.length === 0) {
+                recentActivityEl.innerHTML = '<p class="text-muted text-center">No hay actividad reciente</p>';
+                return;
+            }
+            
+            let html = '';
+            recentFiles.forEach(file => {
+                const timeAgo = 'Hace unos momentos'; // En una app real, calcularíamos esto
+                const icon = file.status === 'signed' ? 'fa-check-circle text-success' : 
+                            file.status === 'pending' ? 'fa-clock text-warning' : 'fa-file text-secondary';
+                
+                html += `
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas ${icon} me-2"></i>
+                        <div class="flex-grow-1">
+                            <div class="small">${file.filename}</div>
+                            <div class="text-muted" style="font-size: 0.75rem;">${timeAgo}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            recentActivityEl.innerHTML = html;
+        }
+
+        function showPopup(type, message) {
+            // Configurar el tipo de popup
+            popup.className = `popup popup-${type}`;
+            
+            // Configurar icono según el tipo
+            let iconClass = '';
+            switch(type) {
+                case 'success':
+                    iconClass = 'fa-check-circle';
+                    break;
+                case 'warning':
+                    iconClass = 'fa-exclamation-triangle';
+                    break;
+                case 'danger':
+                    iconClass = 'fa-times-circle';
+                    break;
+                case 'info':
+                    iconClass = 'fa-info-circle';
+                    break;
+            }
+            popupIcon.className = `popup-icon fas ${iconClass}`;
+            
+            // Configurar mensaje
+            popupContent.textContent = message;
+            
+            // Mostrar popup
+            popup.classList.remove('d-none');
+            
+            // Ocultar automáticamente después de 4 segundos
+            setTimeout(hidePopup, 4000);
+        }
+
+        function hidePopup() {
+            popup.classList.add('hide');
+            setTimeout(() => {
+                popup.classList.add('d-none');
+                popup.classList.remove('hide');
+            }, 500);
+        }
+
+        function viewFileDetails(fileId) {
+            // En una implementación real, obtendríamos los detalles del archivo del servidor
+            const file = files.find(f => f.id === fileId);
+            
+            if (!file) {
+                showPopup('danger', 'No se encontraron detalles del archivo');
+                return;
+            }
+            
+            modalContent.innerHTML = `
+                <div class="mb-3">
+                    <strong>Nombre:</strong> ${file.filename}
+                </div>
+                <div class="mb-3">
+                    <strong>ID:</strong> <span class="monospace">${file.id}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Entorno:</strong> <span class="environment ${file.environment === 'prod' ? 'env-prod' : 'env-dev'}">${file.environment === 'prod' ? 'Producción' : 'Desarrollo'}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Estado:</strong> ${file.status === 'signed' ? '<span class="badge badge-success">Firmado</span>' : '<span class="badge badge-warning">Pendiente</span>'}
+                </div>
+                <div class="mb-3">
+                    <strong>Fecha de subida:</strong> ${file.uploaded_at || file.uploaded_date || '—'}
+                </div>
+                <div class="mb-3">
+                    <strong>Firma (Hash):</strong> <span class="monospace">${file.signature || '—'}</span>
+                </div>
+                ${file.signed_path ? `<div class="mb-3"><strong>Ruta firmada:</strong> ${file.signed_path}</div>` : ''}
+            `;
+            
+            // Configurar botón de descarga
+            modalDownload.onclick = function() {
+                downloadFile(fileId);
+                hideModal();
+            };
+            
+            // Mostrar modal
+            modal.classList.add('show');
+        }
+
+        function hideModal() {
+            modal.classList.remove('show');
+        }
+
+        function downloadFile(fileId) {
+            // En una implementación real, haríamos una petición al servidor para descargar el archivo
+            alert(`Descargando archivo con ID: ${fileId}`);
+            // window.location.href = `/download/${fileId}`;
+        }
+
+        // Funciones globales para los botones en la tabla
+        window.viewFileDetails = viewFileDetails;
+        window.downloadFile = downloadFile;
+    </script>
+</body>
+</html>
